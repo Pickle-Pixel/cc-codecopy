@@ -1,0 +1,13 @@
+{
+  "name": "cc-codecopy",
+  "description": "Copy individual code blocks from Claude's responses to your clipboard. No more terminal text selection gymnastics.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Pickle-Pixel"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pickle-Pixel/cc-codecopy"
+  },
+  "license": "MIT"
+}
