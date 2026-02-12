@@ -11,7 +11,7 @@ Look at your **last assistant message** in this conversation (the message immedi
 
 ## Behavior
 
-### With argument: `/cc-codecopy:cb <arg>`
+### With argument: `/cc:copy <arg>`
 
 | Argument | Action |
 |----------|--------|
@@ -21,7 +21,7 @@ Look at your **last assistant message** in this conversation (the message immedi
 
 If the number is out of range, say: "Block N doesn't exist. Last response has X code blocks (1-X)."
 
-### Without argument: `/cc-codecopy:cb`
+### Without argument: `/cc:copy`
 
 If there is **exactly 1** code block, copy it directly — don't make the user choose.
 

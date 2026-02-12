@@ -12,10 +12,10 @@ Claude gives you a response with 3 code blocks. You want block 2. Your options:
 ## The fix
 
 ```
-/cc-codecopy:cb        → lists blocks, you pick one
-/cc-codecopy:cb 2      → copies block 2 directly
-/cc-codecopy:cb last   → copies the last block
-/cc-codecopy:cb all    → copies all blocks
+/cc:copy        → lists blocks, you pick one
+/cc:copy 2      → copies block 2 directly
+/cc:copy last   → copies the last block
+/cc:copy all    → copies all blocks
 ```
 
 Clean text on your clipboard. No ANSI codes, no fence markers, no surrounding prose.
@@ -45,7 +45,7 @@ claude --plugin-dir ./cc-codecopy
 
 ## How it works
 
-`/cc-codecopy:cb` is a slash command that tells Claude to:
+`/cc:copy` is a slash command that tells Claude to:
 
 1. Look at its own last response
 2. Extract fenced code blocks
@@ -58,7 +58,7 @@ Zero dependencies. No API calls beyond the command invocation itself. Works on W
 Claude shows you a long response with a Docker command buried in it:
 
 ```
-/cc-codecopy:cb
+/cc:copy
 ```
 
 ```
@@ -75,7 +75,7 @@ Type `1` — done. It's on your clipboard.
 Or skip the menu entirely:
 
 ```
-/cc-codecopy:cb 1
+/cc:copy 1
 ```
 
 ## License
