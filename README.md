@@ -1,6 +1,6 @@
 # cc-codecopy
 
-Copy individual code blocks from Claude Code responses to your clipboard. No more terminal text selection.
+Copy individual code blocks from Claude Code responses to your clipboard. Instant, zero API cost.
 
 ## The problem
 
@@ -12,71 +12,66 @@ Claude gives you a response with 3 code blocks. You want block 2. Your options:
 ## The fix
 
 ```
-/cc:copy        → lists blocks, you pick one
-/cc:copy 2      → copies block 2 directly
-/cc:copy last   → copies the last block
-/cc:copy all    → copies all blocks
+ccb          → shows blocks, you pick one
+ccb 2        → copies block 2 instantly
+ccb last     → copies the last block
+ccb all      → copies all blocks
 ```
 
-Clean text on your clipboard. No ANSI codes, no fence markers, no surrounding prose.
+Clean text on your clipboard. No ANSI codes, no fence markers, no surrounding prose. **Zero API calls** — reads session files directly.
 
 ## Install
 
-### From a marketplace
-
-```
-/plugin install <marketplace-url>
+```bash
+npm install -g cc-codecopy
 ```
 
-### Manual (local)
-
-Clone this repo and load it directly:
+Or run without installing:
 
 ```bash
-git clone https://github.com/Pickle-Pixel/cc-codecopy.git
-claude --plugin-dir /path/to/cc-codecopy
+npx cc-codecopy
 ```
 
-### Quick test (no install)
+## Usage
 
-```bash
-claude --plugin-dir ./cc-codecopy
-```
-
-## How it works
-
-`/cc:copy` is a slash command that tells Claude to:
-
-1. Look at its own last response
-2. Extract fenced code blocks
-3. Pipe the one you pick to your system clipboard (`clip.exe` / `pbcopy` / `xclip`)
-
-Zero dependencies. No API calls beyond the command invocation itself. Works on Windows, macOS, and Linux.
-
-## Examples
-
-Claude shows you a long response with a Docker command buried in it:
+Run `ccb` in a separate terminal while Claude Code is open:
 
 ```
-/cc:copy
-```
+$ ccb
 
-```
 Code blocks in last response:
+
   1. [bash]   docker run -d --name postgres -e POS...  (4 lines)
   2. [yaml]   version: "3.8"...                        (22 lines)
   3. [bash]   psql -U admin -d myapp -c "CREATE TA...  (1 line)
 
-Which block? (1-3, "all", or "last")
+Block? (1-3, all, last): 1
+Copied block 1 [bash] to clipboard.
 ```
 
-Type `1` — done. It's on your clipboard.
-
-Or skip the menu entirely:
+Skip the menu:
 
 ```
-/cc:copy 1
+$ ccb 2
+Copied block 2 [yaml] to clipboard.
 ```
+
+If there's only one code block, `ccb` copies it directly — no menu.
+
+## How it works
+
+1. Finds the most recently modified session JSONL in `~/.claude/projects/`
+2. Parses the last assistant message
+3. Extracts fenced code blocks
+4. Copies your selection to clipboard (`clip.exe` / `pbcopy` / `xclip`)
+
+No Claude in the loop. No API calls. No permission prompts. Just reads files and copies text.
+
+## Platform support
+
+- **Windows** (clip.exe)
+- **macOS** (pbcopy)
+- **Linux** (xclip or xsel)
 
 ## License
 
